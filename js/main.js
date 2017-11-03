@@ -1,3 +1,30 @@
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+if (getCookie("login") === "false" || getCookie("login") === undefined || getCookie("login") === "") {
+    $("#selamat_datang").html('Selamat Datang di PLDK Online SMK Telkom Malang!').typewriter({speed: 60});
+    console.log('mlaku' + getCookie("login"))
+}
+
 jQuery(function ($) {
     "use strict";
     // Author Code Here
@@ -49,11 +76,6 @@ jQuery(function ($) {
         $('nav').addClass('original').clone().insertAfter('nav').addClass('navbar-fixed-top').css('position', 'fixed').css('top', '0').css('margin-top', '0').removeClass('original');
         $('.mobile-nav ul').html($('nav .navbar-nav').html());
         $('nav.navbar-fixed-top .navbar-brand img').attr('src', $('nav.navbar-fixed-top .navbar-brand img').data("active-url"));
-
-        // Typing Intro Init
-        $(".typed").typewriter({
-            speed: 60
-        });
 
         // Popup Form Init
         var i = 0;

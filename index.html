@@ -25,6 +25,8 @@
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.1.0/css/font-awesome.min.css">
     <!-- Elegant Icons -->
     <link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
+    <!-- Alert -->
+    <link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
     <!-- Main style -->
     <link rel="stylesheet" type="text/css" href="css/cardio.css">
 </head>
@@ -67,8 +69,8 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <h3 class="light white">Pendidikan dan Latihan Dasar Kepemimpinan SMK Telkom Malang</h3>
-                        <h1 class="white typed">Selamat Datang di PLDK Online SMK Telkom Malang</h1><span
-                            class="typed-cursor">|</span><br>
+                        <h1 class="white typed" id="selamat_datang"></h1>
+                        <span class="typed-cursor">|</span><br><br>
                         <div id="scan"></div>
                     </div>
                 </div>
@@ -203,18 +205,23 @@
 <script src="js/wow.min.js"></script>
 <script src="js/typewriter.js"></script>
 <script src="js/jquery.onepagenav.js"></script>
+<script src="js/sweetalert2.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-    var button_scan = '<a id="button_scan" href="javascript:void(0)" onclick="signOut()" class="btn btn-blue wow fadeIn" data-wow-duration="5s" style="font-size: x-large">Scan QR Senior</a>';
+    var button_scan = '<a id="button_scan" href="javascript:void(0)" onclick="scanQRCode()" class="btn btn-blue wow fadeIn" data-wow-duration="5s" style="font-size: x-large">Scan QR Senior</a>';
     var logout = '<a id="button_logout" href="javascript:void(0)" onclick="signOut()" class="btn btn-blue wow fadeIn" data-wow-duration="5s">Logout</a>';
     var button_login = '<div id="my-signin2"></div>';
 
     new WOW().init();
 
     function onSuccess(googleUser) {
+        setCookie('login', 'true', 365);
         console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
         $("#scan").html(button_scan);
         $("#login").html(logout);
+        $("#selamat_datang").html("");
+        $("#selamat_datang").html('Selamat Datang, ' + googleUser.getBasicProfile().getName() + '!').typewriter({speed: 60});
+        console.log('running')
     }
 
     function onFailure(error) {
@@ -233,13 +240,46 @@
         });
     }
 
+    function scanQRCode() {
+        swal({
+            title: '<i>HTML</i> <u>example</u>',
+            type: 'info',
+            html:
+            '<video id="video" width="500" height="480" autoplay></video>\n' +
+            '<button id="snap">Snap Photo</button>\n' +
+            '<canvas id="canvas" width="500" height="480"></canvas>',
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+                '<i class="fa fa-thumbs-up"></i> Great!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+                '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down'
+        });
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Not adding `{ audio: true }` since we only want video now
+            navigator.mediaDevices.getUserMedia({video: true}).then(function (stream) {
+                video.src = window.URL.createObjectURL(stream);
+                video.play();
+            });
+        }
+    }
+
     function signOut() {
+        setCookie('login', 'false', 365);
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.disconnect();
         auth2.signOut().then(function () {
             console.log('User signed out.');
-            $('#button_scan').remove();
-            $('#button_logout').remove();
+            $("#selamat_datang").html('Selamat Datang di PLDK Online SMK Telkom Malang!').typewriter({speed: 60});
+            $('#button_scan').fadeOut(1500, function () {
+                $(this).remove();
+            });
+            $('#button_logout').fadeOut(1500, function () {
+                $(this).remove();
+            });
             $("#login").html(button_login);
             renderButton();
         });
