@@ -10,6 +10,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/info', senior.cekSenior, senior.addInformasi);
 router.put('/pelanggaran', senior.cekSenior, senior.updatePelanggaran);
-router.get('/info', senior.cekSenior, senior.cekJunior, junior.getInfo);
+router.put('/info', senior.cekSenior, senior.updateInfo);
+router.get('/info', senior.cekSenior, junior.cekJunior, junior.getInfo);
 
 module.exports = router;
