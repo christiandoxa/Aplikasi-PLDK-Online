@@ -7,33 +7,6 @@ const SUCCESS = true;
 const FAIL = false;
 
 function API() {
-    this.cekJunior = function (req, res, next) {
-        let email = req.headers.email;
-        if (email) {
-            if (!req.authorized) {
-                if (regexEmail.test(email)) {
-                    db.que('SELECT * FROM junior WHERE email=?', email, function (err, data) {
-                        if (err) {
-                            if (err == 'other') {
-                                res.status(401).json({status: FAIL, result: "Not Authorized"});
-                            } else {
-                                res.status(400).json({status: FAIL, result: err});
-                            }
-                        } else {
-                            next();
-                        }
-                    })
-                } else {
-                    res.status(400).json({status: FAIL, result: "Email is wrong"});
-                }
-            } else {
-                next();
-            }
-        } else {
-            res.status(400).json({status: FAIL, result: "Email not inserted"});
-        }
-    };
-
     this.getInfo = function (req, res) {
         async.waterfall([
             function (callback) {
