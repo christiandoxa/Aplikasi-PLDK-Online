@@ -45,18 +45,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="img/osisfix.png" data-active-url="img/osisfix.png" alt=""
-                                                  width="50px"></a>
+            <a class="navbar-brand" href="#"><img src="img/osisfix.png" alt="" width="50px"></a>
+            <a class="navbar-brand" href="#"><img src="img/mpkfix.png" alt="" width="50px"></a>
+            <a class="navbar-brand" href="#"><img src="img/dafix.png" alt="" width="50px"></a>
+            <a class="navbar-brand" href="#"><img src="img/pustelfix.png" alt="" width="50px"></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-nav">
-                <li><a href="#intro">Intro</a></li>
+                <li><a href="#intro">Home</a></li>
                 <li><a href="#services">Informasi</a></li>
-                <li id="login" style="display: inline-block">
-                    <div class="g-signin2" style="display: inline-block" data-onsuccess="onSignIn"
-                         data-theme="dark"></div>
-                </li>
+                <!--<li id="login">
+                    <a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue">Masuk</a>
+                </li>-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -72,9 +73,7 @@
                         <h3 class="light white">Pendidikan dan Latihan Dasar Kepemimpinan SMK Telkom Malang</h3>
                         <h1 class="white typed" id="selamat_datang"></h1>
                         <span class="typed-cursor">|</span><br><br>
-                        <div id="scan">
-                            <div id="my-signin2" style="display: inline-block"></div>
-                        </div>
+                        <!--<div id="scan"></div>-->
                     </div>
                 </div>
             </div>
@@ -89,34 +88,24 @@
             <h2 class="light muted">Informasi penting seputar PLDK Online<br>SMK Telkom Malang!</h2>
         </div>
         <div class="row services">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="service">
                     <div class="icon-holder">
-                        <img src="img/icons/heart-blue.png" alt="" class="icon">
+                        <i class="icon blue fa fa-info" style="font-size: 36px"></i>
                     </div>
-                    <h4 class="heading">Cardio Training</h4>
-                    <p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel
-                        suspendisse scelerisque a aenean hac montes.</p>
+                    <h3 class="heading">Informasi</h3>
+                    <p class="description" style="font-size: x-large">Jam malam hari ini pukul <b style="color: red">21:24
+                        WIS</b>.</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="service">
                     <div class="icon-holder">
-                        <img src="img/icons/guru-blue.png" alt="" class="icon">
+                        <i class="icon blue fa fa-warning" style="font-size: 36px"></i>
                     </div>
-                    <h4 class="heading">Yoga Pilates</h4>
-                    <p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel
-                        suspendisse scelerisque a aenean hac montes.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="service">
-                    <div class="icon-holder">
-                        <img src="img/icons/weight-blue.png" alt="" class="icon">
-                    </div>
-                    <h4 class="heading">Power Training</h4>
-                    <p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel
-                        suspendisse scelerisque a aenean hac montes.</p>
+                    <h3 class="heading">Jumlah Pelanggaran</h3>
+                    <p class="description" style="font-size: x-large;">Jumlah pelanggaran peserta PLDK saat ini adalah
+                        <b style="color: red">245P</b>.</p>
                 </div>
             </div>
         </div>
@@ -149,6 +138,15 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-popup">
+            <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+            <h3 class="white">Masuk</h3>
+            <div id="my-signin2" style="display: inline-block"></div>
+        </div>
+    </div>
+</div>
 <footer>
     <div class="container wow fadeInRight" data-wow-duration="3s">
         <div class="row">
@@ -184,8 +182,8 @@
         </div>
         <div class="row bottom-footer text-center-mobile">
             <div class="col-sm-8">
-                <p class="white">&copy; 2017. Powered by <i class="fa fa-code"></i>, Christian Doxa
-                    Hamasiah & Yobel Galih Christian Dwiatma.</p>
+                <p class="white">&copy; 2017 OSIS, MPK, PUSTEL, DA. Powered by <i class="fa fa-code"></i>, Doxa & Yobel.
+                </p>
             </div>
             <div class="col-sm-4 text-right text-center-mobile">
                 <ul class="social-footer">
@@ -210,84 +208,6 @@
 <script src="js/jquery.onepagenav.js"></script>
 <script src="js/sweetalert2.min.js"></script>
 <script src="js/main.js"></script>
-<script>
-    var button_scan = '<a id="button_scan" href="javascript:void(0)" onclick="scanQRCode()" class="btn btn-blue wow fadeIn" data-wow-duration="5s" style="font-size: x-large">Scan QR Senior</a>';
-    var logout = '<a id="button_logout" href="javascript:void(0)" onclick="signOut()" class="btn btn-blue wow fadeIn" data-wow-duration="5s">Logout</a>';
-    var button_login = '<div id="my-signin2"></div>';
-
-    new WOW().init();
-
-    function onSuccess(googleUser) {
-        setCookie('login', 'true', 365);
-        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        $("#scan").html(button_scan);
-        $("#login").html(logout);
-        $("#selamat_datang").html("");
-        $("#selamat_datang").html('Selamat Datang, ' + googleUser.getBasicProfile().getName() + '!').typewriter({speed: 60});
-        console.log('running')
-    }
-
-    function onFailure(error) {
-        console.log(error);
-    }
-
-    function renderButton() {
-        gapi.signin2.render('my-signin2', {
-            'scope': 'profile email',
-            'width': 125,
-            'height': 50,
-            'longtitle': false,
-            'theme': 'light',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-        });
-    }
-
-    function scanQRCode() {
-        swal({
-            title: '<i>HTML</i> <u>example</u>',
-            type: 'info',
-            html:
-            '<video id="video" width="500" height="480" autoplay></video>\n' +
-            '<button id="snap">Snap Photo</button>\n' +
-            '<canvas id="canvas" width="500" height="480"></canvas>',
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-                '<i class="fa fa-thumbs-up"></i> Great!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-                '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down'
-        });
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            // Not adding `{ audio: true }` since we only want video now
-            navigator.mediaDevices.getUserMedia({video: true}).then(function (stream) {
-                video.src = window.URL.createObjectURL(stream);
-                video.play();
-            });
-        }
-    }
-
-    function signOut() {
-        setCookie('login', 'false', 365);
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.disconnect();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-            $("#selamat_datang").html('Selamat Datang di PLDK Online SMK Telkom Malang!').typewriter({speed: 60});
-            $('#button_scan').fadeOut(1500, function () {
-                $(this).remove();
-            });
-            $('#button_logout').fadeOut(1500, function () {
-                $(this).remove();
-            });
-            $("#login").html(button_login);
-            renderButton();
-        });
-    }
-</script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>
 </html>

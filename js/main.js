@@ -22,7 +22,6 @@ function getCookie(cname) {
 
 if (getCookie("login") === "false" || getCookie("login") === undefined || getCookie("login") === "") {
     $("#selamat_datang").html('Selamat Datang di PLDK Online SMK Telkom Malang!').typewriter({speed: 60});
-    console.log('mlaku' + getCookie("login"))
 }
 
 jQuery(function ($) {
@@ -192,3 +191,82 @@ jQuery(function ($) {
         $('.modal:visible').each(centerModal);
     });
 });
+
+var button_scan = '<a id="button_scan" href="javascript:void(0)" onclick="scanQRCode()" class="btn btn-blue wow fadeIn" data-wow-duration="5s" style="font-size: x-large">Scan QR Senior</a>';
+var logout = '<a id="button_logout" href="javascript:void(0)" onclick="signOut()" class="btn btn-blue wow fadeIn" data-wow-duration="5s">Logout</a>';
+var button_login = '<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue wow fadeIn">Masuk</a>';
+
+new WOW().init();
+
+function onSuccess(googleUser) {
+    setCookie('login', 'true', 365);
+    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    /*$("#scan").html(button_scan);*/
+    $("#login").html(logout);
+    $("#login").html(logout);
+    $("#login").html(logout);
+    $("#selamat_datang").html("");
+    $("#selamat_datang").html('Selamat Datang, ' + googleUser.getBasicProfile().getName() + '!').typewriter({speed: 60});
+    console.log('running')
+}
+
+function onFailure(error) {
+    console.log(error);
+}
+
+function renderButton() {
+    gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 125,
+        'height': 50,
+        'longtitle': false,
+        'theme': 'light',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+    });
+}
+
+function scanQRCode() {
+    swal({
+        title: '<i>HTML</i> <u>example</u>',
+        type: 'info',
+        html:
+        '<video id="video" width="500" height="480" autoplay></video>\n' +
+        '<button id="snap">Snap Photo</button>\n' +
+        '<canvas id="canvas" width="500" height="480"></canvas>',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> Great!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+            '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: 'Thumbs down'
+    });
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Not adding `{ audio: true }` since we only want video now
+        navigator.mediaDevices.getUserMedia({video: true}).then(function (stream) {
+            video.src = window.URL.createObjectURL(stream);
+            video.play();
+        });
+    }
+}
+
+function signOut() {
+    setCookie('login', 'false', 365);
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.disconnect();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+        $("#selamat_datang").html('Selamat Datang di PLDK Online SMK Telkom Malang!').typewriter({speed: 60});
+        /*$('#button_scan').fadeOut(1500, function () {
+            $(this).remove();
+        });*/
+        $('#button_logout').fadeOut(1500, function () {
+            $(this).remove();
+        });
+        $("#login").html(button_login);
+        renderButton();
+    });
+}
