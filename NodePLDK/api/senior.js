@@ -44,7 +44,7 @@ function API() {
         }
     };
 
-    this.addInformasi = function (req, res) {
+    this.addInformasi = function (req, res, next) {
         let lokasi_koordinasi = req.body.lokasi_koordinasi;
         if (lokasi_koordinasi) {
             async.waterfall([
@@ -145,6 +145,7 @@ function API() {
                     res.status(400).json({status: FAIL, result: err});
                 } else {
                     res.status(200).json({status: SUCCESS});
+                    next();
                 }
             });
         } else {
@@ -152,7 +153,7 @@ function API() {
         }
     };
 
-    this.updatePelanggaran = function (req, res) {
+    this.updatePelanggaran = function (req, res, next) {
         let jumlahPelanggaran = req.body.jumlah;
         let aksi = req.body.aksi;
         if (aksi) {
@@ -213,6 +214,7 @@ function API() {
                     res.status(400).json({status: FAIL, result: err});
                 } else {
                     res.status(200).json({status: SUCCESS});
+                    next();
                 }
             });
         } else {
@@ -220,18 +222,20 @@ function API() {
         }
     };
 
-    this.updateInfo = function (req, res) {
+    this.updateInfo = function (req, res, next) {
         let lokasi = req.body.lokasi_koordinasi;
         if (lokasi) {
             db.que('UPDATE informasi SET lokasi_koordinasi = ?', lokasi, function (err, data) {
                 if (err) {
                     if (err == 'other') {
                         res.status(200).json({status: SUCCESS});
+                        next();
                     } else {
                         res.status(400).json({status: FAIL, result: err});
                     }
                 } else {
                     res.status(200).json({status: SUCCESS});
+                    next();
                 }
             })
         } else {
@@ -239,7 +243,7 @@ function API() {
         }
     };
 
-    this.updatedetail = function (req, res) {
+    this.updatedetail = function (req, res, next) {
         let idDetail = req.body.id_detail;
         let informasi = req.body.informasi;
         let judul = req.body.judul;
@@ -248,11 +252,13 @@ function API() {
                 if (err) {
                     if (err == 'other') {
                         res.status(200).json({status: SUCCESS});
+                        next();
                     } else {
                         res.status(400).json({status: FAIL, result: err});
                     }
                 } else {
                     res.status(200).json({status: SUCCESS});
+                    next();
                 }
             });
         } else {
@@ -260,7 +266,7 @@ function API() {
         }
     };
 
-    this.insertDetail = function (req, res) {
+    this.insertDetail = function (req, res, next) {
         let idInformasi = req.body.id_informasi;
         let informasi = "";
         if (typeof req.body.informasi === 'string' && req.body.informasi !== "") {
@@ -329,6 +335,7 @@ function API() {
                         res.status(400).json({status: FAIL, result: err});
                     } else {
                         res.status(200).json({status: SUCCESS});
+                        next();
                     }
                 });
             } else {

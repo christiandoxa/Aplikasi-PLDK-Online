@@ -7,7 +7,7 @@ const SUCCESS = true;
 const FAIL = false;
 
 function API() {
-    this.getInfo = function (req, res) {
+    this.getInfo = function (cb) {
         async.waterfall([
             function (callback) {
                 db.que('SELECT * FROM informasi', null, function (err, data) {
@@ -73,9 +73,9 @@ function API() {
             }
         ], function (err, informasi) {
             if (err) {
-                res.status(400).json({status: FAIL, result: err});
+                cb(err, null);
             } else {
-                res.status(200).json({status: SUCCESS, result: informasi});
+                cb(null, informasi);
             }
         });
     }
