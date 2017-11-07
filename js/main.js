@@ -21,7 +21,7 @@ function getCookie(cname) {
 }
 
 if (getCookie("login") === "false" || getCookie("login") === undefined || getCookie("login") === "") {
-    $("#selamat_datang").html('Selamat Datang di PLDK Online SMK Telkom Malang!').typewriter({speed: 60});
+    $("#selamat_datang").html('Selamat Datang di PLDK SMK Telkom Malang!').typewriter({speed: 60});
 }
 
 jQuery(function ($) {
